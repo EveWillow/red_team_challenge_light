@@ -8,7 +8,7 @@ import Sidebar from "../../../components/Sidebar";
 import GuidelinesPanel from "../../../components/GuidelinesPanel";
 
 export default function PlayPage() {
-  const { challengeId } = useParams();
+  const { challengeID } = useParams();
   const [realName, setRealName] = useState("");
   const [hackerName, setHackerName] = useState("");
   const [nameGateOpen, setNameGateOpen] = useState(true);
@@ -51,8 +51,8 @@ export default function PlayPage() {
 
   // --- Load challenge metadata ---
   useEffect(() => {
-    if (!challengeId || !playerId) return;
-    fetch(`/api/challenges/${challengeId}?playerId=${playerId}`)
+    if (!challengeID || !playerId) return;
+    fetch(`/api/challenges/${challengeID}?playerId=${playerId}`)
       .then((res) => res.json())
       .then((meta) => {
         setInstructions(meta.instructions || "");
@@ -63,7 +63,7 @@ export default function PlayPage() {
         setTimeout(() => inputRef.current?.focus(), 0);
       })
       .catch(console.error);
-  }, [challengeId, playerId]);
+  }, [challengeID, playerId]);
 
   // --- UI helpers ---
   useEffect(() => {
@@ -122,7 +122,7 @@ export default function PlayPage() {
     setChat([...chatForServer, userMsg, pendingMsg]);
 
     try {
-      const res = await fetch(`/api/challenges/${challengeId}`, {
+      const res = await fetch(`/api/challenges/${challengeID}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -157,7 +157,7 @@ export default function PlayPage() {
   }
 
   async function handleReset() {
-    if (!challengeId) return;
+    if (!challengeID) return;
     setChat([]);
     setTurnCount(0);
     setWin(false);
@@ -165,12 +165,12 @@ export default function PlayPage() {
     setInstructions("");
 
     try {
-      await fetch(`/api/challenges/${challengeId}`, {
+      await fetch(`/api/challenges/${challengeID}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ realName, hackerName, playerId }),
       });
-      const res = await fetch(`/api/challenges/${challengeId}?playerId=${playerId}`);
+      const res = await fetch(`/api/challenges/${challengeID}?playerId=${playerId}`);
       const meta = await res.json();
       setInstructions(meta.instructions || "");
       setChat(meta.chatHistory || []);

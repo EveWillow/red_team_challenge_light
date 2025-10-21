@@ -5,14 +5,15 @@ import { challengeMeta as kobayashiMaru } from "./kobayashi-maru/route";
 import { challengeMeta as marryMe } from "./marry-me/route";
 import { challengeMeta as onlyHuman } from "./only-human/route";
 
+const challenges = [
+  { ...disclosePassword, id: "disclose-password" },
+  { ...businessIdea, id: "the-business-idea" },
+  { ...kobayashiMaru, id: "kobayashi-maru" },
+  { ...marryMe, id: "marry-me" },
+  { ...onlyHuman, id: "only-human" },
+];
+
 export async function GET() {
-  const challenges = [
-    disclosePassword,
-    businessIdea,
-    kobayashiMaru,
-    marryMe,
-    onlyHuman,
-  ];
 
   // Group by tier
   const tiers = {
