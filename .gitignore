@@ -1,0 +1,28 @@
+# Dependencies and build output
+node_modules/
+.next/
+dist/
+build/
+out/
+coverage/
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+tmp/
+.cache/
+
+# Environment files
+.env
+.env.*.local
+
+# macOS and editor junk
+.DS_Store
+.vscode/
+.idea/
+
+# Slack-related
+.slack/
+.slack-logs/
